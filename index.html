@@ -132,7 +132,8 @@
 <span class="font-headline-md text-headline-md font-bold text-primary">RefDecoder</span>
 </div>
 <nav class="hidden md:flex gap-8 items-center h-full">
-<a class="nav-link text-on-surface-variant hover:text-primary transition-all font-body-md text-body-md py-1 border-b-2 border-transparent" href="#abstract">Abstract</a>
+<a class="nav-link text-on-surface-variant hover:text-primary transition-all font-body-md text-body-md py-1 border-b-2 border-transparent" href="#comparisons">Comparisons</a>
+<a class="nav-link text-on-surface-variant hover:text-primary transition-all font-body-md text-body-md py-1 border-b-2 border-transparent" href="#tldr">TL;DR</a>
 <a class="nav-link text-on-surface-variant hover:text-primary transition-all font-body-md text-body-md py-1 border-b-2 border-transparent" href="#method">Overview &amp; Architecture</a>
 <a class="nav-link text-on-surface-variant hover:text-primary transition-all font-body-md text-body-md py-1 border-b-2 border-transparent" href="#results">Visual Comparison</a>
 <a class="nav-link text-on-surface-variant hover:text-primary transition-all font-body-md text-body-md py-1 border-b-2 border-transparent" href="#highlights">Highlights</a>
@@ -172,24 +173,117 @@
 </div>
 </div>
 </section>
-<!-- Abstract -->
-<section class="py-16 border-y border-outline-variant mb-16 scroll-mt-20" id="abstract">
-<h2 class="font-headline-lg text-headline-lg text-primary mb-8 uppercase tracking-widest text-center">Abstract</h2>
-<div class="max-w-[850px] mx-auto">
-<img alt="Teaser Figure." class="w-full h-auto rounded-lg" src="assets/images/refdecoder_teaser.jpg"/>
-<p class="font-body-lg text-body-lg text-on-surface-variant leading-relaxed text-justify mt-4">
-    Video generation powers a vast array of downstream applications.
-    However, while the <i>de facto</i> standard, <i>i.e.</i>, latent diffusion models, typically employ heavily conditioned denoising networks, their decoders often remain unconditional.
-    We observe that this <strong class="text-primary font-semibold">architectural asymmetry</strong> leads to significant loss of detail and inconsistency relative to the input image.
-    To address this, we argue that the decoder requires equal conditioning to preserve structural integrity.
+<!-- Highlights (compact) -->
+<section class="mb-10 scroll-mt-20" id="highlights">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-x-8 gap-y-4">
+<div class="font-body-md text-body-md text-on-surface-variant leading-snug pl-4 border-l-2 border-primary">
+<strong class="text-primary font-semibold">+2.1&thinsp;dB PSNR</strong> over unconditional VAE baselines.
+</div>
+<div class="font-body-md text-body-md text-on-surface-variant leading-snug pl-4 border-l-2 border-primary">
+Superior <strong class="text-primary font-semibold">subject consistency</strong> across extended sequences.
+</div>
+<div class="font-body-md text-body-md text-on-surface-variant leading-snug pl-4 border-l-2 border-primary">
+Enhanced <strong class="text-primary font-semibold">background stability</strong> in high-motion scenes.
+</div>
+</div>
+</section>
+<!-- Video Comparisons Carousel -->
+<hr class="border-t border-outline-variant mb-10"/>
+<section class="mb-8 scroll-mt-20" id="comparisons">
+<div class="relative" id="comparisons-carousel">
+<div class="overflow-hidden rounded-xl">
+<div class="flex transition-transform duration-500 ease-out" id="carousel-track">
+<!-- Slide 1 -->
+<div class="w-full flex-shrink-0 px-1">
+<div class="bg-surface-container-low rounded-xl p-6">
+<div class="flex items-start gap-4 mb-5">
+<img alt="Reference input" class="aspect-video w-64 rounded-lg object-cover flex-shrink-0 border border-outline-variant" src="TODO"/>
+<p class="font-body-sm text-body-sm text-on-surface-variant italic leading-relaxed">"TODO: prompt for slide 1..."</p>
+</div>
+<div class="comparison-slider relative aspect-video bg-black rounded-lg overflow-hidden select-none cursor-ew-resize" data-pos="50">
+<video class="comparison-baseline absolute inset-0 w-full h-full object-cover" autoplay="" loop="" muted="" playsinline=""><source src="TODO" type="video/mp4"/></video>
+<div class="comparison-clip absolute inset-0 overflow-hidden" style="clip-path: inset(0 0 0 50%)">
+<video class="absolute inset-0 w-full h-full object-cover" autoplay="" loop="" muted="" playsinline=""><source src="TODO" type="video/mp4"/></video>
+</div>
+<div class="absolute top-3 left-3 px-2.5 py-1 bg-black/60 text-white font-label-md text-label-md rounded">Baseline</div>
+<div class="absolute top-3 right-3 px-2.5 py-1 bg-primary/90 text-on-primary font-label-md text-label-md rounded">RefDecoder</div>
+<div class="comparison-handle absolute top-0 bottom-0 w-0.5 bg-white pointer-events-none" style="left: 50%">
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white shadow-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px] text-on-surface" data-icon="drag_indicator">drag_indicator</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Slide 2 -->
+<div class="w-full flex-shrink-0 px-1">
+<div class="bg-surface-container-low rounded-xl p-6">
+<div class="flex items-start gap-4 mb-5">
+<img alt="Reference input" class="aspect-video w-64 rounded-lg object-cover flex-shrink-0 border border-outline-variant" src="TODO"/>
+<p class="font-body-sm text-body-sm text-on-surface-variant italic leading-relaxed">"TODO: prompt for slide 2..."</p>
+</div>
+<div class="comparison-slider relative aspect-video bg-black rounded-lg overflow-hidden select-none cursor-ew-resize" data-pos="50">
+<video class="comparison-baseline absolute inset-0 w-full h-full object-cover" autoplay="" loop="" muted="" playsinline=""><source src="TODO" type="video/mp4"/></video>
+<div class="comparison-clip absolute inset-0 overflow-hidden" style="clip-path: inset(0 0 0 50%)">
+<video class="absolute inset-0 w-full h-full object-cover" autoplay="" loop="" muted="" playsinline=""><source src="TODO" type="video/mp4"/></video>
+</div>
+<div class="absolute top-3 left-3 px-2.5 py-1 bg-black/60 text-white font-label-md text-label-md rounded">Baseline</div>
+<div class="absolute top-3 right-3 px-2.5 py-1 bg-primary/90 text-on-primary font-label-md text-label-md rounded">RefDecoder</div>
+<div class="comparison-handle absolute top-0 bottom-0 w-0.5 bg-white pointer-events-none" style="left: 50%">
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white shadow-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px] text-on-surface" data-icon="drag_indicator">drag_indicator</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Slide 3 -->
+<div class="w-full flex-shrink-0 px-1">
+<div class="bg-surface-container-low rounded-xl p-6">
+<div class="flex items-start gap-4 mb-5">
+<img alt="Reference input" class="aspect-video w-64 rounded-lg object-cover flex-shrink-0 border border-outline-variant" src="TODO"/>
+<p class="font-body-sm text-body-sm text-on-surface-variant italic leading-relaxed">"TODO: prompt for slide 3..."</p>
+</div>
+<div class="comparison-slider relative aspect-video bg-black rounded-lg overflow-hidden select-none cursor-ew-resize" data-pos="50">
+<video class="comparison-baseline absolute inset-0 w-full h-full object-cover" autoplay="" loop="" muted="" playsinline=""><source src="TODO" type="video/mp4"/></video>
+<div class="comparison-clip absolute inset-0 overflow-hidden" style="clip-path: inset(0 0 0 50%)">
+<video class="absolute inset-0 w-full h-full object-cover" autoplay="" loop="" muted="" playsinline=""><source src="TODO" type="video/mp4"/></video>
+</div>
+<div class="absolute top-3 left-3 px-2.5 py-1 bg-black/60 text-white font-label-md text-label-md rounded">Baseline</div>
+<div class="absolute top-3 right-3 px-2.5 py-1 bg-primary/90 text-on-primary font-label-md text-label-md rounded">RefDecoder</div>
+<div class="comparison-handle absolute top-0 bottom-0 w-0.5 bg-white pointer-events-none" style="left: 50%">
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white shadow-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px] text-on-surface" data-icon="drag_indicator">drag_indicator</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Carousel navigation -->
+<button aria-label="Previous" class="absolute top-1/2 -translate-y-1/2 -left-4 md:-left-6 w-10 h-10 rounded-full bg-surface-container-lowest border border-outline-variant shadow-md flex items-center justify-center hover:bg-surface-container transition-colors z-10" id="carousel-prev">
+<span class="material-symbols-outlined text-[24px] text-on-surface" data-icon="chevron_left">chevron_left</span>
+</button>
+<button aria-label="Next" class="absolute top-1/2 -translate-y-1/2 -right-4 md:-right-6 w-10 h-10 rounded-full bg-surface-container-lowest border border-outline-variant shadow-md flex items-center justify-center hover:bg-surface-container transition-colors z-10" id="carousel-next">
+<span class="material-symbols-outlined text-[24px] text-on-surface" data-icon="chevron_right">chevron_right</span>
+</button>
+<div class="flex justify-center gap-2 mt-5" id="carousel-dots"></div>
+</div>
+</section>
+<!-- TL;DR -->
+<section class="py-10 border-y border-outline-variant mb-10 scroll-mt-20" id="tldr">
+<h2 class="font-headline-lg text-headline-lg text-primary mb-8">TL;DR</h2>
+<div class="grid grid-cols-1 md:grid-cols-[3fr_2fr] gap-8 items-start">
+<img alt="Teaser Figure." class="w-full h-auto rounded-lg" src="assets/images/refdecoder_teaser.png"/>
+<div>
+<p class="font-body-lg text-body-lg text-on-surface-variant leading-relaxed text-justify">
+    Did you know there's still a <strong class="text-primary font-semibold">free lunch</strong> 🍲 in video generation? DiT models gobble up your beautiful image details 🌃 inside their compressed latent space and never give them back during decoding. With <strong class="text-primary font-bold">RefDecoder</strong>, we recover those details straight from your input image and hand them right back to you.
 </p>
 <p class="font-body-lg text-body-lg text-on-surface-variant leading-relaxed text-justify mt-4">
-    We introduce <strong class="text-primary font-bold">RefDecoder</strong>, a reference-conditioned video VAE decoder by injecting high-fidelity reference image signal directly into the decoding process via reference attention.
-    Specifically, a lightweight image encoder maps the reference frame into the detail-rich high-dimensional tokens, which are co-processed with the denoised video latent tokens at each decoder up-sampling stage.
-    We demonstrate consistent improvements across several distinct decoder backbones (<i>e.g.</i>, Wan 2.1 and VideoVAE<strong>+</strong>), achieving up to +2.1&thinsp;dB PSNR over the unconditional baselines on the Inter4K, WebVid, and Large Motion reconstruction benchmarks.
-    Notably, <strong class="text-primary font-bold">RefDecoder</strong> can be directly swapped into existing video generation systems without additional fine-tuning, and we report across-the-board improvements in subject consistency, background consistency, and overall quality scores on the VBench I2V benchmark.
-    Beyond I2V, <strong class="text-primary font-bold">RefDecoder</strong> generalizes well to a wide range of visual generation tasks such as style transfer and video editing refinement.
+    <strong class="text-primary font-bold">RefDecoder</strong> improves video decoding quality by up to <strong class="text-primary font-semibold">10%</strong> over even the best frontier open-source video generation models, including Wan and Hunyuan Video. Human evaluators prefer our outputs over vanilla decoding <strong class="text-primary font-semibold">80% of the time</strong>, with even larger gains in content-rich scenes such as urban streets, indoor venues, and sports action. As a <strong class="text-primary font-semibold">plug-and-play</strong> module, <strong class="text-primary font-bold">RefDecoder</strong> drops into any video generation pipeline without re-training the heavy DiT transformer, and you can swap it in and out to compare against the original output. Beyond I2V, our reference-conditioning framework is versatile &mdash; the same framework extends to video editing, style transfer, and more, unlocking exciting new applications and efficiency gains that bypass the costly, time-consuming diffusion process.
 </p>
+</div>
 </div>
 </section>
 <!-- Methodology / Architecture -->
@@ -268,16 +362,6 @@
 </div>
 </div>
 
-<!-- Highlights -->
-<section class="mb-20 scroll-mt-20" id="highlights">
-    <h2 class="font-headline-lg text-headline-lg text-primary mb-8">Highlights</h2>
-    <ul class="space-y-4">
-    <li class="font-body-md text-body-md"><strong class="text-on-surface">+2.1 dB PSNR</strong> improvement over unconditional VAE baselines.</li>
-    <li class="font-body-md text-body-md">Superior <strong class="text-on-surface">subject consistency</strong> across extended sequences.</li>
-    <li class="font-body-md text-body-md">Enhanced <strong class="text-on-surface">background stability</strong> in high-motion scenes.</li>
-  </ul>
-</div>
-</section>
 
 <!-- Citation -->
 <section class="mb-32 scroll-mt-20" id="citation">
@@ -339,6 +423,84 @@
         }, observerOptions);
 
         sections.forEach(section => observer.observe(section));
+
+        // --- Comparison sliders (draggable before/after) ---
+        document.querySelectorAll('.comparison-slider').forEach(slider => {
+            const handle = slider.querySelector('.comparison-handle');
+            const clip = slider.querySelector('.comparison-clip');
+            let dragging = false;
+
+            const setPos = (clientX) => {
+                const rect = slider.getBoundingClientRect();
+                const x = Math.max(0, Math.min(rect.width, clientX - rect.left));
+                const pct = (x / rect.width) * 100;
+                handle.style.left = pct + '%';
+                clip.style.clipPath = `inset(0 0 0 ${pct}%)`;
+            };
+
+            const onDown = (e) => {
+                dragging = true;
+                const cx = e.touches ? e.touches[0].clientX : e.clientX;
+                setPos(cx);
+                e.preventDefault();
+            };
+            const onMove = (e) => {
+                if (!dragging) return;
+                const cx = e.touches ? e.touches[0].clientX : e.clientX;
+                setPos(cx);
+            };
+            const onUp = () => { dragging = false; };
+
+            slider.addEventListener('mousedown', onDown);
+            slider.addEventListener('touchstart', onDown, { passive: false });
+            window.addEventListener('mousemove', onMove);
+            window.addEventListener('touchmove', onMove, { passive: false });
+            window.addEventListener('mouseup', onUp);
+            window.addEventListener('touchend', onUp);
+        });
+
+        // --- Carousel ---
+        const track = document.getElementById('carousel-track');
+        if (track) {
+            const slides = Array.from(track.children);
+            const total = slides.length;
+            const prevBtn = document.getElementById('carousel-prev');
+            const nextBtn = document.getElementById('carousel-next');
+            const dotsContainer = document.getElementById('carousel-dots');
+            let current = 0;
+
+            slides.forEach((_, i) => {
+                const dot = document.createElement('button');
+                dot.className = 'w-2.5 h-2.5 rounded-full transition-colors';
+                dot.setAttribute('aria-label', `Go to slide ${i + 1}`);
+                dot.addEventListener('click', () => goTo(i));
+                dotsContainer.appendChild(dot);
+            });
+
+            const updateDots = () => {
+                Array.from(dotsContainer.children).forEach((d, i) => {
+                    d.classList.toggle('bg-primary', i === current);
+                    d.classList.toggle('bg-outline-variant', i !== current);
+                });
+            };
+
+            const goTo = (idx) => {
+                current = (idx + total) % total;
+                track.style.transform = `translateX(-${current * 100}%)`;
+                updateDots();
+            };
+
+            prevBtn.addEventListener('click', () => goTo(current - 1));
+            nextBtn.addEventListener('click', () => goTo(current + 1));
+
+            // Keyboard arrows
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowLeft') goTo(current - 1);
+                if (e.key === 'ArrowRight') goTo(current + 1);
+            });
+
+            updateDots();
+        }
     });
 </script>
 </body></html>
