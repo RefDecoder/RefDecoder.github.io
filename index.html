@@ -466,10 +466,45 @@ Enhanced <strong class="text-primary font-semibold">background stability</strong
             window.addEventListener('touchend', onUp);
         });
 
-        document.querySelectorAll('.comparison-play-toggle').forEach(button => {
-            const slider = button.closest('.comparison-slider');
+        document.querySelectorAll('.comparison-slider').forEach(slider => {
             const videos = Array.from(slider.querySelectorAll('video'));
-            const icon = button.querySelector('[data-icon]');
+            const button = slider.querySelector('.comparison-play-toggle');
+            const icon = button?.querySelector('[data-icon]');
+            if (videos.length < 2 || !button || !icon) return;
+
+            const leader = slider.querySelector('.comparison-baseline') || videos[0];
+            const followers = videos.filter(video => video !== leader);
+            const syncTolerance = 0.03;
+            const pendingPlay = new WeakSet();
+
+            const clampTime = (video, time) => {
+                if (Number.isFinite(video.duration) && video.duration > 0) {
+                    return Math.min(time, Math.max(0, video.duration - 0.02));
+                }
+                return time;
+            };
+
+            const safePlay = (video) => {
+                if (!video.paused || pendingPlay.has(video)) return;
+                const playPromise = video.play();
+                if (playPromise?.catch) {
+                    pendingPlay.add(video);
+                    playPromise.catch(() => {}).finally(() => pendingPlay.delete(video));
+                }
+            };
+
+            const syncToLeader = (force = false) => {
+                if (!Number.isFinite(leader.currentTime)) return;
+                followers.forEach(video => {
+                    const targetTime = clampTime(video, leader.currentTime);
+                    if (force || Math.abs(video.currentTime - targetTime) > syncTolerance) {
+                        video.currentTime = targetTime;
+                    }
+                    if (video.playbackRate !== leader.playbackRate) {
+                        video.playbackRate = leader.playbackRate;
+                    }
+                });
+            };
 
             const syncButton = () => {
                 const paused = videos.every(video => video.paused);
@@ -480,26 +515,70 @@ Enhanced <strong class="text-primary font-semibold">background stability</strong
                 button.title = paused ? 'Play videos' : 'Pause videos';
             };
 
+            const playAll = () => {
+                syncToLeader(true);
+                videos.forEach(video => safePlay(video));
+                syncButton();
+            };
+
+            const pauseAll = () => {
+                videos.forEach(video => video.pause());
+                syncToLeader(true);
+                syncButton();
+            };
+
             button.addEventListener('click', (e) => {
                 e.preventDefault();
                 e.stopPropagation();
 
                 const shouldPlay = videos.some(video => video.paused);
-                videos.forEach(video => {
-                    if (shouldPlay) {
-                        video.play().catch(() => {});
-                    } else {
-                        video.pause();
-                    }
-                });
-                syncButton();
+                if (shouldPlay) {
+                    playAll();
+                } else {
+                    pauseAll();
+                }
             });
 
             videos.forEach(video => {
+                video.addEventListener('loadedmetadata', () => syncToLeader(true));
+                video.addEventListener('canplay', () => syncToLeader(true));
                 video.addEventListener('play', syncButton);
                 video.addEventListener('pause', syncButton);
+                video.addEventListener('ratechange', () => {
+                    if (video !== leader && video.playbackRate !== leader.playbackRate) {
+                        video.playbackRate = leader.playbackRate;
+                    }
+                });
             });
+
+            leader.addEventListener('play', () => {
+                syncToLeader(true);
+                followers.forEach(video => {
+                    if (video.paused) safePlay(video);
+                });
+            });
+            leader.addEventListener('pause', () => {
+                followers.forEach(video => {
+                    if (!video.paused) video.pause();
+                });
+                syncToLeader(true);
+            });
+            leader.addEventListener('seeking', () => syncToLeader(true));
+            leader.addEventListener('seeked', () => syncToLeader(true));
+
+            const keepInSync = () => {
+                if (!leader.paused && !leader.ended) {
+                    syncToLeader();
+                    followers.forEach(video => {
+                        if (video.paused) safePlay(video);
+                    });
+                }
+                requestAnimationFrame(keepInSync);
+            };
+
+            syncToLeader(true);
             syncButton();
+            keepInSync();
         });
 
         // --- Carousel ---
