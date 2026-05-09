@@ -466,6 +466,8 @@ Enhanced <strong class="text-primary font-semibold">background stability</strong
             window.addEventListener('touchend', onUp);
         });
 
+        const comparisonControllers = new WeakMap();
+
         document.querySelectorAll('.comparison-slider').forEach(slider => {
             const videos = Array.from(slider.querySelectorAll('video'));
             const button = slider.querySelector('.comparison-play-toggle');
@@ -474,12 +476,15 @@ Enhanced <strong class="text-primary font-semibold">background stability</strong
 
             const leader = slider.querySelector('.comparison-baseline') || videos[0];
             const followers = videos.filter(video => video !== leader);
-            const syncTolerance = 0.03;
+            const syncTolerance = 0.015;
             const pendingPlay = new WeakSet();
+            let active = false;
+            let userPaused = false;
+            let syncFrame = null;
 
             const clampTime = (video, time) => {
                 if (Number.isFinite(video.duration) && video.duration > 0) {
-                    return Math.min(time, Math.max(0, video.duration - 0.02));
+                    return Math.min(time % video.duration, Math.max(0, video.duration - 0.001));
                 }
                 return time;
             };
@@ -487,7 +492,7 @@ Enhanced <strong class="text-primary font-semibold">background stability</strong
             const safePlay = (video) => {
                 if (!video.paused || pendingPlay.has(video)) return;
                 const playPromise = video.play();
-                if (playPromise?.catch) {
+                if (playPromise && typeof playPromise.catch === 'function') {
                     pendingPlay.add(video);
                     playPromise.catch(() => {}).finally(() => pendingPlay.delete(video));
                 }
@@ -498,7 +503,9 @@ Enhanced <strong class="text-primary font-semibold">background stability</strong
                 followers.forEach(video => {
                     const targetTime = clampTime(video, leader.currentTime);
                     if (force || Math.abs(video.currentTime - targetTime) > syncTolerance) {
-                        video.currentTime = targetTime;
+                        try {
+                            video.currentTime = targetTime;
+                        } catch (_) {}
                     }
                     if (video.playbackRate !== leader.playbackRate) {
                         video.playbackRate = leader.playbackRate;
@@ -515,16 +522,62 @@ Enhanced <strong class="text-primary font-semibold">background stability</strong
                 button.title = paused ? 'Play videos' : 'Pause videos';
             };
 
-            const playAll = () => {
+            const startSyncLoop = () => {
+                if (syncFrame !== null) return;
+                const keepInSync = () => {
+                    if (!active) {
+                        syncFrame = null;
+                        return;
+                    }
+                    if (!leader.paused && !leader.ended) {
+                        syncToLeader();
+                        followers.forEach(video => {
+                            if (video.paused) safePlay(video);
+                        });
+                    }
+                    syncFrame = requestAnimationFrame(keepInSync);
+                };
+                syncFrame = requestAnimationFrame(keepInSync);
+            };
+
+            const stopSyncLoop = () => {
+                if (syncFrame !== null) {
+                    cancelAnimationFrame(syncFrame);
+                    syncFrame = null;
+                }
+            };
+
+            const playAll = (fromUser = false) => {
+                if (fromUser) userPaused = false;
                 syncToLeader(true);
                 videos.forEach(video => safePlay(video));
+                startSyncLoop();
                 syncButton();
             };
 
-            const pauseAll = () => {
+            const pauseAll = (fromUser = false) => {
+                if (fromUser) userPaused = true;
                 videos.forEach(video => video.pause());
                 syncToLeader(true);
+                stopSyncLoop();
                 syncButton();
+            };
+
+            const setActive = (isActive) => {
+                active = isActive;
+                syncToLeader(true);
+
+                if (active) {
+                    if (userPaused) {
+                        pauseAll();
+                    } else {
+                        playAll();
+                    }
+                } else {
+                    stopSyncLoop();
+                    videos.forEach(video => video.pause());
+                    syncButton();
+                }
             };
 
             button.addEventListener('click', (e) => {
@@ -533,9 +586,9 @@ Enhanced <strong class="text-primary font-semibold">background stability</strong
 
                 const shouldPlay = videos.some(video => video.paused);
                 if (shouldPlay) {
-                    playAll();
+                    playAll(true);
                 } else {
-                    pauseAll();
+                    pauseAll(true);
                 }
             });
 
@@ -552,33 +605,32 @@ Enhanced <strong class="text-primary font-semibold">background stability</strong
             });
 
             leader.addEventListener('play', () => {
+                if (!active) return;
                 syncToLeader(true);
                 followers.forEach(video => {
                     if (video.paused) safePlay(video);
                 });
+                startSyncLoop();
+                syncButton();
             });
             leader.addEventListener('pause', () => {
+                if (!active) return;
                 followers.forEach(video => {
                     if (!video.paused) video.pause();
                 });
                 syncToLeader(true);
+                stopSyncLoop();
+                syncButton();
             });
             leader.addEventListener('seeking', () => syncToLeader(true));
             leader.addEventListener('seeked', () => syncToLeader(true));
 
-            const keepInSync = () => {
-                if (!leader.paused && !leader.ended) {
-                    syncToLeader();
-                    followers.forEach(video => {
-                        if (video.paused) safePlay(video);
-                    });
-                }
-                requestAnimationFrame(keepInSync);
-            };
-
             syncToLeader(true);
             syncButton();
-            keepInSync();
+            comparisonControllers.set(slider, {
+                setActive,
+                sync: () => syncToLeader(true)
+            });
         });
 
         // --- Carousel ---
@@ -590,6 +642,7 @@ Enhanced <strong class="text-primary font-semibold">background stability</strong
             const nextBtn = document.getElementById('carousel-next');
             const dotsContainer = document.getElementById('carousel-dots');
             let current = 0;
+            let transitionSyncTimer = null;
 
             slides.forEach((_, i) => {
                 const dot = document.createElement('button');
@@ -606,10 +659,23 @@ Enhanced <strong class="text-primary font-semibold">background stability</strong
                 });
             };
 
+            const updateActiveSlideVideos = () => {
+                slides.forEach((slide, i) => {
+                    const slider = slide.querySelector('.comparison-slider');
+                    const controller = slider ? comparisonControllers.get(slider) : null;
+                    if (controller) {
+                        controller.setActive(i === current);
+                    }
+                });
+            };
+
             const goTo = (idx) => {
                 current = (idx + total) % total;
                 track.style.transform = `translateX(-${current * 100}%)`;
                 updateDots();
+                updateActiveSlideVideos();
+                clearTimeout(transitionSyncTimer);
+                transitionSyncTimer = setTimeout(updateActiveSlideVideos, 550);
             };
 
             prevBtn.addEventListener('click', () => goTo(current - 1));
@@ -622,6 +688,7 @@ Enhanced <strong class="text-primary font-semibold">background stability</strong
             });
 
             updateDots();
+            updateActiveSlideVideos();
         }
     });
 </script>
