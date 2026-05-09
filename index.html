@@ -207,6 +207,9 @@ Enhanced <strong class="text-primary font-semibold">background stability</strong
 </div>
 <div class="absolute top-3 left-3 px-2.5 py-1 bg-black/60 text-white font-label-md text-label-md rounded">Baseline</div>
 <div class="absolute top-3 right-3 px-2.5 py-1 bg-primary/90 text-on-primary font-label-md text-label-md rounded">RefDecoder</div>
+<button type="button" aria-label="Pause comparison videos" title="Pause videos" class="comparison-play-toggle absolute bottom-3 right-3 z-20 w-10 h-10 rounded-full bg-black/65 text-white shadow-lg flex items-center justify-center hover:bg-black/80 transition-colors cursor-pointer">
+<span class="material-symbols-outlined text-[22px]" data-icon="pause">pause</span>
+</button>
 <div class="comparison-handle absolute top-0 bottom-0 w-0.5 bg-white pointer-events-none" style="left: 50%">
 <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white shadow-lg flex items-center justify-center">
 <span class="material-symbols-outlined text-[20px] text-on-surface" data-icon="drag_indicator">drag_indicator</span>
@@ -219,16 +222,19 @@ Enhanced <strong class="text-primary font-semibold">background stability</strong
 <div class="w-full flex-shrink-0 px-1">
 <div class="bg-surface-container-low rounded-xl p-6">
 <div class="flex items-start gap-4 mb-5">
-<img alt="Reference input: a man riding a bike down a street" class="aspect-video w-64 rounded-lg object-cover flex-shrink-0 border border-outline-variant" src="assets/images/examples/man-riding-bike-street.jpg"/>
-<p class="font-body-sm text-body-sm text-on-surface-variant italic leading-relaxed">"a man riding a bike down a street"</p>
+<img alt="Reference input: a yellow boat is cruising in front of a bridge" class="aspect-video w-64 rounded-lg object-cover flex-shrink-0 border border-outline-variant" src="assets/images/examples/yellow-boat-bridge.jpg"/>
+<p class="font-body-sm text-body-sm text-on-surface-variant italic leading-relaxed">"a yellow boat is cruising in front of a bridge"</p>
 </div>
 <div class="comparison-slider relative aspect-video bg-black rounded-lg overflow-hidden select-none cursor-ew-resize" data-pos="50">
-<video class="comparison-baseline absolute inset-0 w-full h-full object-cover" autoplay="" loop="" muted="" playsinline=""><source src="assets/videos/compare/man-riding-bike-street-wan.mp4" type="video/mp4"/></video>
+<video class="comparison-baseline absolute inset-0 w-full h-full object-cover" autoplay="" loop="" muted="" playsinline=""><source src="assets/videos/compare/yellow-boat-bridge-wan.mp4" type="video/mp4"/></video>
 <div class="comparison-clip absolute inset-0 overflow-hidden" style="clip-path: inset(0 0 0 50%)">
-<video class="absolute inset-0 w-full h-full object-cover" autoplay="" loop="" muted="" playsinline=""><source src="assets/videos/compare/man-riding-bike-street-ours.mp4" type="video/mp4"/></video>
+<video class="absolute inset-0 w-full h-full object-cover" autoplay="" loop="" muted="" playsinline=""><source src="assets/videos/compare/yellow-boat-bridge-ours.mp4" type="video/mp4"/></video>
 </div>
 <div class="absolute top-3 left-3 px-2.5 py-1 bg-black/60 text-white font-label-md text-label-md rounded">Baseline</div>
 <div class="absolute top-3 right-3 px-2.5 py-1 bg-primary/90 text-on-primary font-label-md text-label-md rounded">RefDecoder</div>
+<button type="button" aria-label="Pause comparison videos" title="Pause videos" class="comparison-play-toggle absolute bottom-3 right-3 z-20 w-10 h-10 rounded-full bg-black/65 text-white shadow-lg flex items-center justify-center hover:bg-black/80 transition-colors cursor-pointer">
+<span class="material-symbols-outlined text-[22px]" data-icon="pause">pause</span>
+</button>
 <div class="comparison-handle absolute top-0 bottom-0 w-0.5 bg-white pointer-events-none" style="left: 50%">
 <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white shadow-lg flex items-center justify-center">
 <span class="material-symbols-outlined text-[20px] text-on-surface" data-icon="drag_indicator">drag_indicator</span>
@@ -251,6 +257,9 @@ Enhanced <strong class="text-primary font-semibold">background stability</strong
 </div>
 <div class="absolute top-3 left-3 px-2.5 py-1 bg-black/60 text-white font-label-md text-label-md rounded">Baseline</div>
 <div class="absolute top-3 right-3 px-2.5 py-1 bg-primary/90 text-on-primary font-label-md text-label-md rounded">RefDecoder</div>
+<button type="button" aria-label="Pause comparison videos" title="Pause videos" class="comparison-play-toggle absolute bottom-3 right-3 z-20 w-10 h-10 rounded-full bg-black/65 text-white shadow-lg flex items-center justify-center hover:bg-black/80 transition-colors cursor-pointer">
+<span class="material-symbols-outlined text-[22px]" data-icon="pause">pause</span>
+</button>
 <div class="comparison-handle absolute top-0 bottom-0 w-0.5 bg-white pointer-events-none" style="left: 50%">
 <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white shadow-lg flex items-center justify-center">
 <span class="material-symbols-outlined text-[20px] text-on-surface" data-icon="drag_indicator">drag_indicator</span>
@@ -436,6 +445,7 @@ Enhanced <strong class="text-primary font-semibold">background stability</strong
             };
 
             const onDown = (e) => {
+                if (e.target.closest('button')) return;
                 dragging = true;
                 const cx = e.touches ? e.touches[0].clientX : e.clientX;
                 setPos(cx);
@@ -454,6 +464,42 @@ Enhanced <strong class="text-primary font-semibold">background stability</strong
             window.addEventListener('touchmove', onMove, { passive: false });
             window.addEventListener('mouseup', onUp);
             window.addEventListener('touchend', onUp);
+        });
+
+        document.querySelectorAll('.comparison-play-toggle').forEach(button => {
+            const slider = button.closest('.comparison-slider');
+            const videos = Array.from(slider.querySelectorAll('video'));
+            const icon = button.querySelector('[data-icon]');
+
+            const syncButton = () => {
+                const paused = videos.every(video => video.paused);
+                const iconName = paused ? 'play_arrow' : 'pause';
+                icon.textContent = iconName;
+                icon.dataset.icon = iconName;
+                button.setAttribute('aria-label', paused ? 'Play comparison videos' : 'Pause comparison videos');
+                button.title = paused ? 'Play videos' : 'Pause videos';
+            };
+
+            button.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+
+                const shouldPlay = videos.some(video => video.paused);
+                videos.forEach(video => {
+                    if (shouldPlay) {
+                        video.play().catch(() => {});
+                    } else {
+                        video.pause();
+                    }
+                });
+                syncButton();
+            });
+
+            videos.forEach(video => {
+                video.addEventListener('play', syncButton);
+                video.addEventListener('pause', syncButton);
+            });
+            syncButton();
         });
 
         // --- Carousel ---
