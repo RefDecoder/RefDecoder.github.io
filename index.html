@@ -5,7 +5,7 @@
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>RefDecoder: Enhancing Visual Generation with Conditional Video Decoding</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <script id="tailwind-config">
         tailwind.config = {
@@ -13,53 +13,59 @@
             theme: {
                 extend: {
                     "colors": {
-                        "on-surface": "#e1e2ee",
-                        "on-surface-variant": "#c2c6d8",
-                        "on-background": "#e1e2ee",
-                        "surface-variant": "#32343e",
-                        "on-primary-fixed": "#001849",
-                        "on-primary-container": "#f8f7ff",
-                        "on-secondary-fixed": "#001b3d",
-                        "on-error-container": "#ffdad6",
-                        "primary": "#b3c5ff",
-                        "tertiary-container": "#63738a",
-                        "error": "#ffb4ab",
-                        "secondary-fixed": "#d6e3ff",
-                        "secondary-fixed-dim": "#b1c7f2",
-                        "on-tertiary": "#213145",
-                        "on-tertiary-container": "#f6f8ff",
-                        "outline": "#8c90a1",
-                        "on-error": "#690005",
-                        "surface-container": "#1d1f28",
-                        "primary-container": "#0066ff",
-                        "primary-fixed": "#dae1ff",
-                        "surface-container-low": "#191b24",
-                        "surface": "#10131c",
-                        "tertiary": "#b7c8e1",
-                        "secondary-container": "#31476b",
-                        "primary-fixed-dim": "#b3c5ff",
-                        "tertiary-fixed": "#d3e4fe",
-                        "background": "#10131c",
-                        "surface-container-highest": "#32343e",
-                        "inverse-on-surface": "#2e303a",
-                        "on-secondary": "#193053",
-                        "surface-container-high": "#272a33",
-                        "error-container": "#93000a",
-                        "surface-bright": "#363943",
-                        "on-secondary-fixed-variant": "#31476b",
-                        "on-tertiary-fixed-variant": "#38485d",
-                        "on-primary": "#002b75",
-                        "on-secondary-container": "#a0b6e0",
-                        "inverse-surface": "#e1e2ee",
-                        "secondary": "#b1c7f2",
+                        "background":               "#f7f8fc",
+                        "surface":                  "#f0f2f8",
+                        "surface-container":        "#efefef",
+                        "surface-container-low":    "#f7f8fc",
+                        "surface-container-high":   "#e8e8e8",
+                        "surface-container-highest":"#e0e0e0",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-dim":              "#e0e0e0",
+                        "surface-bright":           "#f7f8fc",
+                        "surface-variant":          "#dde2f0",
+
+                        "on-background":            "#1a1c25",
+                        "on-surface":               "#1a1c25",
+                        "on-surface-variant":       "#44475a",
+
+                        "primary":                  "#0054d6",
+                        "primary-container":        "#0054d6",
+                        "on-primary":               "#ffffff",
+                        "on-primary-container":     "#ffffff",
+                        "primary-fixed":            "#dae1ff",
+                        "primary-fixed-dim":        "#b3c5ff",
+                        "on-primary-fixed":         "#001849",
                         "on-primary-fixed-variant": "#003fa4",
-                        "surface-container-lowest": "#0b0e16",
-                        "surface-tint": "#b3c5ff",
-                        "surface-dim": "#10131c",
-                        "outline-variant": "#424656",
-                        "inverse-primary": "#0054d6",
-                        "on-tertiary-fixed": "#0b1c30",
-                        "tertiary-fixed-dim": "#b7c8e1"
+                        "inverse-primary":          "#b3c5ff",
+
+                        "secondary":                "#4a6fa5",
+                        "secondary-container":      "#d6e3ff",
+                        "on-secondary":             "#ffffff",
+                        "on-secondary-container":   "#1a3460",
+                        "secondary-fixed":          "#d6e3ff",
+                        "secondary-fixed-dim":      "#b1c7f2",
+                        "on-secondary-fixed":       "#001b3d",
+                        "on-secondary-fixed-variant":"#31476b",
+
+                        "tertiary":                 "#4a6380",
+                        "tertiary-container":       "#d3e4fe",
+                        "on-tertiary":              "#ffffff",
+                        "on-tertiary-container":    "#0b1c30",
+                        "tertiary-fixed":           "#d3e4fe",
+                        "tertiary-fixed-dim":       "#b7c8e1",
+                        "on-tertiary-fixed":        "#0b1c30",
+                        "on-tertiary-fixed-variant":"#38485d",
+
+                        "error":                    "#ba1a1a",
+                        "error-container":          "#ffdad6",
+                        "on-error":                 "#ffffff",
+                        "on-error-container":       "#93000a",
+
+                        "outline":                  "#74778a",
+                        "outline-variant":          "#c4c6d8",
+                        "inverse-surface":          "#2e303a",
+                        "inverse-on-surface":       "#f0f0fa",
+                        "surface-tint":             "#0054d6",
                     },
                     "borderRadius": {
                         "DEFAULT": "0.125rem",
@@ -75,16 +81,16 @@
                         "margin-desktop": "64px"
                     },
                     "fontFamily": {
-                        "body-md": ["Inter"],
-                        "body-sm": ["Inter"],
-                        "body-lg": ["Inter"],
-                        "headline-lg": ["Inter"],
-                        "label-md": ["Inter"],
+                        "body-md": ["Manrope"],
+                        "body-sm": ["Manrope"],
+                        "body-lg": ["Manrope"],
+                        "headline-lg": ["Manrope"],
+                        "label-md": ["Manrope"],
                         "label-mono": ["JetBrains Mono"],
-                        "display-lg": ["Inter"],
-                        "headline-md": ["Inter"],
+                        "display-lg": ["Manrope"],
+                        "headline-md": ["Manrope"],
                         "mono-md": ["JetBrains Mono"],
-                        "headline-sm": ["Inter"]
+                        "headline-sm": ["Manrope"]
                     },
                     "fontSize": {
                         "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
@@ -106,7 +112,7 @@
         .material-symbols-outlined {
             font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
         }
-        body { font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
+        body { font-family: 'Manrope', sans-serif; scroll-behavior: smooth; }
         .logo-glow {
             filter: drop-shadow(0 0 8px rgba(0, 102, 255, 0.4));
         }
@@ -122,7 +128,7 @@
 <header class="fixed top-0 left-0 w-full z-50 flex justify-center items-center bg-surface-container/80 backdrop-blur-md px-margin-mobile md:px-margin-desktop h-16 border-b border-outline-variant">
 <div class="max-w-[1200px] w-full flex justify-between items-center">
 <div class="flex items-center gap-3">
-<img alt="RefDecoder Logo" class="w-8 h-8 logo-glow rounded-full" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCCW2_OJR5gZxiohZDCan8uWG3Yg9WDs8AalSXK--3d8rcw8L9fAF-BFRSwkdI8lQgWex3hxzV0-w7ZYev9FtrLGAsBa1fo-50NsIC4iWYhgaxnj6ktpbpjm4OQgtx5yXKMZP7aFRkRZLcfhXC8LwL0M4UtSLFHPDOiS9zWeA3FJdstlANZqItkQFQErd1KNTBYmrewh_ILFoKonvRkfknCG47OJqZi6V6vS8Y-BhuB1OMar9iuUIHFzcvh58WU5FtKyMFXXZXTbzM"/>
+<img alt="RefDecoder Logo" class="w-8 h-8 logo-glow rounded-full" src="assets/images/logo.png"/>
 <span class="font-headline-md text-headline-md font-bold text-primary">RefDecoder</span>
 </div>
 <nav class="hidden md:flex gap-8 items-center h-full">
@@ -143,14 +149,12 @@
 <main class="max-w-[1200px] mx-auto px-margin-mobile md:px-margin-desktop pt-24">
 <!-- Hero Section -->
 <section class="py-16 text-center">
-<h1 class="font-display-lg text-display-lg text-primary mb-8 leading-tight"><img alt="RefDecoder Logo" class="w-12 h-12 logo-glow rounded-full inline-block align-middle mr-4" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCCW2_OJR5gZxiohZDCan8uWG3Yg9WDs8AalSXK--3d8rcw8L9fAF-BFRSwkdI8lQgWex3hxzV0-w7ZYev9FtrLGAsBa1fo-50NsIC4iWYhgaxnj6ktpbpjm4OQgtx5yXKMZP7aFRkRZLcfhXC8LwL0M4UtSLFHPDOiS9zWeA3FJdstlANZqItkQFQErd1KNTBYmrewh_ILFoKonvRkfknCG47OJqZi6V6vS8Y-BhuB1OMar9iuUIHFzcvh58WU5FtKyMFXXZXTbzM"/>RefDecoder: Enhancing Visual Generation with Conditional Video Decoding</h1>
+<h1 class="font-display-lg text-display-lg text-primary mb-8 leading-tight"><img alt="RefDecoder Logo" class="w-12 h-12 logo-glow rounded-full inline-block align-middle mr-4" src="assets/images/logo.png"/>RefDecoder: Enhancing Visual Generation with Conditional Video Decoding</h1>
 <div class="space-y-4">
-<p class="font-headline-md text-headline-md text-on-surface">Anonymous Author(s)</p>
-<p class="font-body-lg text-body-lg text-on-surface-variant">NeurIPS 2026 Submission</p>
+<p class="font-headline-md text-headline-md text-on-surface">Xiang Fan, Yuheng Wang, Bohan Fang, Jason Ren, Ranjay Krishna</p>
 <div class="flex flex-wrap justify-center gap-3 mt-8">
-<span class="px-5 py-1.5 bg-surface-container-low border border-outline-variant rounded-full text-label-mono font-label-mono text-on-surface-variant">Affiliation</span>
-<span class="px-5 py-1.5 bg-surface-container-low border border-outline-variant rounded-full text-label-mono font-label-mono text-on-surface-variant">Address</span>
-<span class="px-5 py-1.5 bg-surface-container-low border border-outline-variant rounded-full text-label-mono font-label-mono text-on-surface-variant">email@example.com</span>
+<span class="px-5 py-1.5 bg-surface-container-low border border-outline-variant rounded-full text-label-mono font-label-mono text-on-surface-variant">University of Washington</span>
+<span class="px-5 py-1.5 bg-surface-container-low border border-outline-variant rounded-full text-label-mono font-label-mono text-on-surface-variant">University of North Carolina at Chapel Hill</span>
 </div>
 </div>
 </section>
@@ -158,7 +162,8 @@
 <section class="py-16 border-y border-outline-variant mb-16 scroll-mt-20" id="abstract">
 <h2 class="font-headline-lg text-headline-lg text-primary mb-8 uppercase tracking-widest text-center">Abstract</h2>
 <div class="max-w-[850px] mx-auto">
-<p class="font-body-lg text-body-lg text-on-surface-variant leading-relaxed text-justify">
+<img alt="Teaser Figure." class="w-full h-auto rounded-lg" src="assets/images/refdecoder_teaser.jpg"/>
+<p class="font-body-lg text-body-lg text-on-surface-variant leading-relaxed text-justify mt-4">
     Video generation powers a vast array of downstream applications.
     However, while the <i>de facto</i> standard, <i>i.e.</i>, latent diffusion models, typically employ heavily conditioned denoising networks, their decoders often remain unconditional.
     We observe that this <strong class="text-primary font-semibold">architectural asymmetry</strong> leads to significant loss of detail and inconsistency relative to the input image.
@@ -181,10 +186,10 @@
 <!-- Detailed Architecture Figure -->
 <div class="w-full">
 <div class="relative group">
-<img alt="Architecture overview of the REFDECODER. The reference image is encoded into tokens and injected into the decoder through shared attention blocks, enabling interactions between reference and latent tokens during decoding." class="w-full h-auto rounded-lg brightness-90 contrast-110" src="https://lh3.googleusercontent.com/aida/ADBb0ugFfADk0gOI9UrqfIgs0ATZs_zyKxhBCOZahW9KtimNSo4DlrHh7H_43cU7FWrSYfzb1oQ8dUp8NqykJbjV84kXmJiasMJ67hsyrsDg99fUc085GlBdygMRsacTjBHV8yOeZI9QPVCGn_5sP5wCa_HnZJN2O09BWHkUEvMbfyHGnufO8u9LhOb_R9NyRJNRVR-tZxoyrgAShNWbDbno4-0Ni6frmMNhGYxTWP1znit2lv9Z6kHOtUFwaqwFrxYOQtdnrymopnAU"/>
+<img alt="Architecture overview of the REFDECODER. The reference image is encoded into tokens and injected into the decoder through shared attention blocks, enabling interactions between reference and latent tokens during decoding." class="w-full h-auto rounded-lg" src="refdecoder_arch.jpg"/>
 </div>
 <p class="text-center font-body-sm text-body-sm text-on-surface-variant mt-6 italic max-w-3xl mx-auto">
-                            Figure 1: Detailed architecture of RefDecoder. The high-fidelity reference signal is injected via shared attention blocks to maintain spatial-temporal consistency.
+                        Detailed architecture of RefDecoder. The high-fidelity reference signal is injected via shared attention blocks to maintain spatial-temporal consistency.
                         </p>
 </div>
 <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start border-t border-outline-variant pt-10">
@@ -196,7 +201,7 @@
 </div>
 <div class="bg-primary-container p-6 rounded-lg text-on-primary-container">
 <h4 class="font-headline-md text-headline-md mb-3 flex items-center gap-2">
-<img alt="Icon" class="w-6 h-6 invert" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCCW2_OJR5gZxiohZDCan8uWG3Yg9WDs8AalSXK--3d8rcw8L9fAF-BFRSwkdI8lQgWex3hxzV0-w7ZYev9FtrLGAsBa1fo-50NsIC4iWYhgaxnj6ktpbpjm4OQgtx5yXKMZP7aFRkRZLcfhXC8LwL0M4UtSLFHPDOiS9zWeA3FJdstlANZqItkQFQErd1KNTBYmrewh_ILFoKonvRkfknCG47OJqZi6V6vS8Y-BhuB1OMar9iuUIHFzcvh58WU5FtKyMFXXZXTbzM"/>
+<img alt="Icon" class="w-6 h-6 invert" src="assets/images/logo.png"/>
                                 Key Advantage
                             </h4>
 <p class="font-body-sm text-body-sm opacity-90">
@@ -210,79 +215,58 @@
 <!-- Visual Comparisons -->
 <section class="mb-20 scroll-mt-20" id="results">
 <h2 class="font-headline-lg text-headline-lg text-primary mb-10">Qualitative Performance</h2>
-<div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
-<!-- Case 1 -->
-<div class="bg-surface-container border border-outline-variant rounded-xl overflow-hidden shadow-sm">
-<img alt="Intricate watch mechanism" class="w-full h-64 object-cover brightness-75" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDEwA9RDNnJhLtinO4pYhhfikY_2G1MiMq-jyqMzJkGiF3dVjSZstfyFYKhyGSxHrPO3sTKUb_zPy65VUxLaEHkJsW-j3tSEdeBK44HdKlPNo3GBUTqf0kVZ1jZ5rhjy7-PdZ1Ctze4a0pBNMUXXUeTnB8AvY7HCogDjWSMP-dISP20qFLVAq7pxzlRLQjR29YPV6U70lez12Ti9TLii58nJnKLAKvfXfy1N-He9QvUbXLt8qp-vx414GJoxUshAXig4xQ1SK0-mFo"/>
-<div class="p-5 flex justify-between items-center border-t border-outline-variant">
-<div>
-<p class="font-label-mono text-label-md text-on-surface-variant">BASELINE</p>
-<p class="font-body-sm text-body-sm text-on-surface-variant/70 italic">Blurred gears</p>
+
+<!-- Figure 1: Reconstruction comparison -->
+<div class="bg-surface-container border border-outline-variant p-6 rounded-xl mb-8">
+  <img alt="Qualitative reconstruction comparison between Wan baseline and Ours across two video sequences." class="w-full h-auto rounded-lg" src="assets/images/compare.png"/>
+  <p class="text-center font-body-sm text-body-sm text-on-surface-variant mt-4 italic">
+    Video generation comparisons. For the same input reference, three frames generated at different timesteps are shown. The baseline distorts the underlying scene structure, whereas RefDecoder preserves the structure while producing sharper and more consistent details across frames.
+  </p>
 </div>
-<div class="text-right">
-<p class="font-label-mono text-label-md text-primary flex items-center justify-end gap-1">
-<img alt="Icon" class="w-3 h-3" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCCW2_OJR5gZxiohZDCan8uWG3Yg9WDs8AalSXK--3d8rcw8L9fAF-BFRSwkdI8lQgWex3hxzV0-w7ZYev9FtrLGAsBa1fo-50NsIC4iWYhgaxnj6ktpbpjm4OQgtx5yXKMZP7aFRkRZLcfhXC8LwL0M4UtSLFHPDOiS9zWeA3FJdstlANZqItkQFQErd1KNTBYmrewh_ILFoKonvRkfknCG47OJqZi6V6vS8Y-BhuB1OMar9iuUIHFzcvh58WU5FtKyMFXXZXTbzM"/>
-                                REFDECODER
-                            </p>
-<p class="font-body-sm text-body-sm text-primary font-bold">Sharp details</p>
-</div>
-</div>
-</div>
-<!-- Case 2 -->
-<div class="bg-surface-container border border-outline-variant rounded-xl overflow-hidden shadow-sm">
-<img alt="Street cafe scene" class="w-full h-64 object-cover brightness-75" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCgYmxEtMJ5hg-hEStFVjzgeZFntljo-7ji37yaAe2fSfjajMiJ3qPvE9R4kfzJZDHUk4p79aFeOkuBfGelcx85gWFucN-ff5-l_GPX9HDGUPtBnv280YDbBcayXhoOYvD6gMfJEqF3wvFWfXqxvWuCkUASX6VKUoMidrx3dEvlvn996yfkyGXB6Sr302phKVzQkMMAI5fU6x9L98WFEAiO9nzF5xDcceTHigXKBEQEpgS3EJJhIqVO4kWXzFSIOAY6I5WKD_Y6WNw"/>
-<div class="p-5 flex justify-between items-center border-t border-outline-variant">
-<div>
-<p class="font-label-mono text-label-md text-on-surface-variant">BASELINE</p>
-<p class="font-body-sm text-body-sm text-on-surface-variant/70 italic">Muted colors</p>
-</div>
-<div class="text-right">
-<p class="font-label-mono text-label-md text-primary flex items-center justify-end gap-1">
-<img alt="Icon" class="w-3 h-3" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCCW2_OJR5gZxiohZDCan8uWG3Yg9WDs8AalSXK--3d8rcw8L9fAF-BFRSwkdI8lQgWex3hxzV0-w7ZYev9FtrLGAsBa1fo-50NsIC4iWYhgaxnj6ktpbpjm4OQgtx5yXKMZP7aFRkRZLcfhXC8LwL0M4UtSLFHPDOiS9zWeA3FJdstlANZqItkQFQErd1KNTBYmrewh_ILFoKonvRkfknCG47OJqZi6V6vS8Y-BhuB1OMar9iuUIHFzcvh58WU5FtKyMFXXZXTbzM"/>
-                                REFDECODER
-                            </p>
-<p class="font-body-sm text-body-sm text-primary font-bold">Vivid palette</p>
-</div>
-</div>
-</div>
-</div>
-<!-- New Style Transfer Section -->
+
+<!-- Add more examples here in the same format
+<div class="bg-surface-container border border-outline-variant p-6 rounded-xl mb-12">
+  <img alt="Additional qualitative results." class="w-full h-auto rounded-lg" src="assets/images/refdecoder_qual2.png"/>
+  <p class="text-center font-body-sm text-body-sm text-on-surface-variant mt-4 italic">
+    Additional qualitative results on the Large Motion benchmark.
+  </p>
+</div> -->
+
+<!-- Application: Style Transfer -->
 <div class="mb-12">
-<h3 class="font-headline-md text-headline-md text-primary mb-6">Qualitative Results: Style Transfer</h3>
+<h3 class="font-headline-md text-headline-md text-primary mb-6">Application: Style Transfer</h3>
 <div class="bg-surface-container border border-outline-variant p-6 rounded-xl overflow-hidden">
-<img alt="Qualitative results on the style transfer task. The reconstructed images follow the reference style while preserving the structural content of the input images." class="w-full h-auto rounded-lg brightness-90" src="https://lh3.googleusercontent.com/aida/ADBb0uioLDHxiaefik3C9TyK6jYZs6vhIRlcaXqeHbe5kmY3QjVftLb6q_9iXktWtetSArFhelwvmC7BTRvtZUtxS7We7jxmCfgsHeOZYehHGOpXL61Qz6SJOC04bPq04khh-jOWsWQ93VhdbJWImmhiXORSaOqn6wM7tFRvOiWftu7aH67KBj3EGFnXbdMqw2qNyXd5KPvgkA9vMhkC6SIOPvPdhHIbwfFgUumbXn9-1VOt2v9S5lTKx7ebAOMlrfmbkbhy_MAH41uhNQ"/>
+<img alt="Qualitative results on the style transfer task." class="w-full h-auto rounded-lg" src="assets/images/styletransfer.png"/>
 <p class="text-center font-body-sm text-body-sm text-on-surface-variant mt-6 italic">
-                        Figure 2: Our model demonstrates significant versatility in zero-shot style transfer, maintaining structural integrity of the input while accurately mapping the reference style.
-                    </p>
+  Qualitative results on the style transfer task. The reconstructed images follow the reference style while preserving the structural content of the input images.
+</p>
 </div>
 </div>
-<!-- Quantitative Summary -->
-<div class="bg-surface-container-high p-8 rounded-xl border border-outline-variant flex flex-col md:flex-row gap-10 items-center scroll-mt-20" id="highlights">
-<div class="flex-1">
-<h3 class="font-headline-md text-headline-md text-primary mb-6">Performance Highlights</h3>
-<ul class="space-y-5">
-<li class="flex items-start gap-4">
-<span class="material-symbols-outlined text-primary font-bold" data-icon="verified">verified</span>
-<span class="font-body-md text-body-md"><strong class="text-on-surface">+2.1 dB PSNR</strong> improvement over unconditional VAE baselines.</span>
-</li>
-<li class="flex items-start gap-4">
-<span class="material-symbols-outlined text-primary font-bold" data-icon="verified">verified</span>
-<span class="font-body-md text-body-md">Superior <strong class="text-on-surface">subject consistency</strong> across extended sequences.</span>
-</li>
-<li class="flex items-start gap-4">
-<span class="material-symbols-outlined text-primary font-bold" data-icon="verified">verified</span>
-<span class="font-body-md text-body-md">Enhanced <strong class="text-on-surface">background stability</strong> in high-motion scenes.</span>
-</li>
-</ul>
+
+<!-- Application: Video Editing -->
+<div class="mb-12">
+<h3 class="font-headline-md text-headline-md text-primary mb-6">Application: Video Editing</h3>
+<div class="bg-surface-container border border-outline-variant p-6 rounded-xl overflow-hidden">
+<img alt="Qualitative results on the style transfer task." class="w-full h-auto rounded-lg" src="assets/images/loraedit.png"/>
+<p class="text-center font-body-sm text-body-sm text-on-surface-variant mt-6 italic">
+  Qualitative comparison on LoRA-Edit. Reference: first frame of the source video. The baseline decoder distorts non-edited regions, while RefDecoder regenerates them faithfully from the reference, preserving high-quality details such as the text.
+</p>
 </div>
-<div class="w-full md:w-5/12 aspect-video bg-surface-container-lowest rounded-lg border border-outline-variant overflow-hidden shadow-inner relative">
-<img alt="Cinematic castle on mountain peak" class="w-full h-full object-cover brightness-75" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCGCugFhpZ7l1OGP-j-votJzf3YqxEdzqHDGRFZjCw-6DK8y82Oj4Mp-VHwHBTiAMb0_JoZcCx5URTEPtPoXEEZCqfMC9gk4PDHJooozNgFhlsq5SZRswldMC8LroDraCJwwbF3YQC8zdwEM0SZeyLnwX0itAHnPwoE8fXl08MhEuNMCokchb0d2pn_KK06bS8wacc4mPJMonY_zpbBvIFQOqMeJpAz5vkjcJpmkUBGj5QTrxjmrlfTL81aRP2jVdjSsZ3m2oK4GnQ"/>
-<div class="absolute inset-0 border border-primary/10 pointer-events-none"></div>
 </div>
+
+<!-- Highlights -->
+<section class="mb-20 scroll-mt-20" id="paper">
+    <h2 class="font-headline-lg text-headline-lg text-primary mb-8">Highlights</h2>
+    <ul class="space-y-4">
+    <li class="font-body-md text-body-md"><strong class="text-on-surface">+2.1 dB PSNR</strong> improvement over unconditional VAE baselines.</li>
+    <li class="font-body-md text-body-md">Superior <strong class="text-on-surface">subject consistency</strong> across extended sequences.</li>
+    <li class="font-body-md text-body-md">Enhanced <strong class="text-on-surface">background stability</strong> in high-motion scenes.</li>
+  </ul>
 </div>
 </section>
+
 <!-- Citation -->
-<section class="mb-24 scroll-mt-20" id="paper">
+<section class="mb-32 scroll-mt-20" id="paper">
 <h2 class="font-headline-lg text-headline-lg text-primary mb-8">Citation</h2>
 <div class="bg-surface-container border border-outline-variant p-8 rounded-xl relative group">
 <button class="absolute top-6 right-6 flex items-center gap-2 text-primary font-label-mono text-label-md hover:bg-primary/10 px-4 py-2 rounded-lg transition-all border border-primary/20">
@@ -303,7 +287,7 @@
 <div class="w-full py-12 px-margin-mobile md:px-margin-desktop flex flex-col md:flex-row justify-between items-center max-w-[1200px] mx-auto">
 <div class="flex flex-col gap-2 mb-8 md:mb-0">
 <div class="flex items-center gap-3 mb-2">
-<img alt="RefDecoder Logo" class="w-6 h-6 rounded-full" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCCW2_OJR5gZxiohZDCan8uWG3Yg9WDs8AalSXK--3d8rcw8L9fAF-BFRSwkdI8lQgWex3hxzV0-w7ZYev9FtrLGAsBa1fo-50NsIC4iWYhgaxnj6ktpbpjm4OQgtx5yXKMZP7aFRkRZLcfhXC8LwL0M4UtSLFHPDOiS9zWeA3FJdstlANZqItkQFQErd1KNTBYmrewh_ILFoKonvRkfknCG47OJqZi6V6vS8Y-BhuB1OMar9iuUIHFzcvh58WU5FtKyMFXXZXTbzM"/>
+<img alt="RefDecoder Logo" class="w-6 h-6 rounded-full" src="assets/images/logo.png"/>
 <span class="font-headline-md text-headline-md font-bold text-primary">RefDecoder</span>
 </div>
 </div>
