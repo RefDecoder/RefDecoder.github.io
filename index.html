@@ -381,13 +381,13 @@ Enhanced <strong class="text-primary font-semibold">background stability</strong
 <section class="mb-32 scroll-mt-20" id="citation">
 <div class="flex justify-between items-end mb-8 gap-4 flex-wrap">
 <h2 class="font-headline-lg text-headline-lg text-primary">Citation</h2>
-<button class="flex items-center gap-2 text-primary font-label-mono text-label-md hover:bg-primary/10 px-4 py-2 rounded-lg transition-all border border-primary/20">
+<button class="flex items-center gap-2 text-primary font-label-mono text-label-md hover:bg-primary/10 px-4 py-2 rounded-lg transition-all border border-primary/20" id="copy-bibtex" type="button">
 <span class="material-symbols-outlined text-[18px]" data-icon="content_copy">content_copy</span>
-                    COPY BIBTEX
+<span id="copy-bibtex-label">COPY BIBTEX</span>
                 </button>
 </div>
 <div class="bg-surface-container border border-outline-variant p-8 rounded-xl">
-<pre class="font-mono-md text-mono-md text-on-surface-variant overflow-x-auto whitespace-pre-wrap">@misc{fan2026refdecoderenhancingvisualgeneration,
+<pre class="font-mono-md text-mono-md text-on-surface-variant overflow-x-auto whitespace-pre-wrap" id="bibtex-content">@misc{fan2026refdecoderenhancingvisualgeneration,
       title={RefDecoder: Enhancing Visual Generation with Conditional Video Decoding}, 
       author={Xiang Fan and Yuheng Wang and Bohan Fang and Zhongzheng Ren and Ranjay Krishna},
       year={2026},
@@ -442,6 +442,49 @@ Enhanced <strong class="text-primary font-semibold">background stability</strong
         }, observerOptions);
 
         sections.forEach(section => observer.observe(section));
+
+        const copyBibtexButton = document.getElementById('copy-bibtex');
+        const bibtexContent = document.getElementById('bibtex-content');
+        const copyBibtexLabel = document.getElementById('copy-bibtex-label');
+
+        const copyText = async (text) => {
+            if (navigator.clipboard && window.isSecureContext) {
+                await navigator.clipboard.writeText(text);
+                return;
+            }
+
+            const textarea = document.createElement('textarea');
+            textarea.value = text;
+            textarea.setAttribute('readonly', '');
+            textarea.style.position = 'fixed';
+            textarea.style.opacity = '0';
+            document.body.appendChild(textarea);
+            textarea.select();
+
+            try {
+                if (!document.execCommand('copy')) {
+                    throw new Error('Copy command failed');
+                }
+            } finally {
+                document.body.removeChild(textarea);
+            }
+        };
+
+        if (copyBibtexButton && bibtexContent && copyBibtexLabel) {
+            const originalLabel = copyBibtexLabel.textContent;
+            copyBibtexButton.addEventListener('click', async () => {
+                try {
+                    await copyText(bibtexContent.textContent.trim());
+                    copyBibtexLabel.textContent = 'COPIED';
+                } catch (_) {
+                    copyBibtexLabel.textContent = 'COPY FAILED';
+                }
+
+                window.setTimeout(() => {
+                    copyBibtexLabel.textContent = originalLabel;
+                }, 1600);
+            });
+        }
 
         // --- Comparison sliders (draggable before/after) ---
         document.querySelectorAll('.comparison-slider').forEach(slider => {
