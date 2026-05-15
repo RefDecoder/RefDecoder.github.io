@@ -117,6 +117,15 @@
         .logo-glow {
             filter: drop-shadow(0 0 8px rgba(0, 102, 255, 0.4));
         }
+        .hf-icon {
+            display: inline-block;
+            flex-shrink: 0;
+            width: 1.25rem;
+            height: 1.25rem;
+            background-color: currentColor;
+            -webkit-mask: url("assets/images/huggingface-logo.svg") center / contain no-repeat;
+            mask: url("assets/images/huggingface-logo.svg") center / contain no-repeat;
+        }
         .nav-link.active {
             color: #b3c5ff;
             border-bottom: 2px solid #b3c5ff;
@@ -164,8 +173,8 @@
 <span>GitHub</span>
 </a>
 <a class="flex items-center gap-2 px-5 py-2 bg-primary text-on-primary rounded-full font-body-md text-body-md hover:opacity-90 transition-opacity" href="https://huggingface.co/Arrokothwhi/RefDecoder" target="_blank" rel="noopener noreferrer">
-<img alt="" aria-hidden="true" class="w-5 h-5" src="assets/images/huggingface-logo.svg"/>
-<span>Hugging Face</span>
+<span aria-hidden="true" class="hf-icon"></span>
+<span>Model</span>
 </a>
 <a class="flex items-center gap-2 px-5 py-2 bg-primary text-on-primary rounded-full font-body-md text-body-md hover:opacity-90 transition-opacity" href="https://arxiv.org/abs/2605.15196" target="_blank" rel="noopener noreferrer">
 <span class="material-symbols-outlined text-[20px]" data-icon="article">article</span>
